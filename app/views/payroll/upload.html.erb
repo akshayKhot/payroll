@@ -1,2 +1,7 @@
-<h1>Payroll#upload</h1>
-<p>Find me in app/views/payroll/upload.html.erb</p>
+<h1>Upload Time Report</h1>
+
+<%= form_tag({:action => :create}, :multipart => true) do %>
+  <%= file_field_tag "employee_report" %>
+  <br> <br>
+  <%= submit_tag "upload" %>
+<% end %>
