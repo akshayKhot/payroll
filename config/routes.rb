@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   get "/api/report" => "payroll#report"
   get "/success" => "payroll#success"
+  get "/duplicate" => "payroll#duplicate"
 end
