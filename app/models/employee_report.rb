@@ -16,4 +16,9 @@ class EmployeeReport
   def pay_employee_for(workday)
     @amount_paid += @employee.amount_paid(workday.hours)
   end
+
+  def self.create(employee, pay_period, workday)
+    amount_to_pay = employee.amount_paid(workday.hours)
+    new(employee, pay_period, amount_to_pay)
+  end
 end
