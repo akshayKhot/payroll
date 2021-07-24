@@ -21,16 +21,22 @@ class Report
         emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee.id, pay_period) }
 
         if emp_report
-          emp_report.add_amount_to_employee(employee, daily_hours)
+          emp_report.add_amount_to_employee(daily_hours)
         else
-          employee_reports << EmployeeReport.new(employee.id, pay_period, employee.amount_paid(daily_hours.hours))
+          employee_reports << EmployeeReport.new(employee, pay_period, employee.amount_paid(daily_hours.hours))
         end
       end
     end
 
     {
       payroll_report: {
-        employee_reports: employee_reports
+        employee_reports: employee_reports.collect do |er|
+          {
+            employee_id: er.employee.id,
+            pay_period: er.pay_period,
+            amount_paid: er.amount_paid
+          }
+        end
       }
     }
   end
