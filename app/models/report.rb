@@ -17,11 +17,7 @@ class Report
       end
     end
 
-    {
-      payroll_report: {
-        employee_reports: employee_reports.collect { |report| report.build }
-      }
-    }
+    PayrollReport.new(employee_reports)
   end
 
   private
