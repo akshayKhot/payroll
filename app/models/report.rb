@@ -6,9 +6,6 @@ class Report
   end
 
   def generate
-    employee_reports = []
-
-    # Tracks each employees daily work hours
     employee_workdays = {}
 
     @employees.each { |e| employee_workdays[e] = [] }
@@ -17,6 +14,8 @@ class Report
       employee = @employees.find { |e| e.id == time_report.employee_id }
       employee_workdays[employee] << Workday.new(time_report)
     end
+
+    employee_reports = []
 
     employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
