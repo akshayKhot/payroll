@@ -19,8 +19,7 @@ class PayrollController < ApplicationController
   end
 
   def report
-    payrollReport = ReportGenerator.new.generate
-    render :json => payrollReport
+    render :json => Report.new.generate
   end
 
   def success

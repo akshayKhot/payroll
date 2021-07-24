@@ -1,5 +1,5 @@
 
-class ReportGenerator
+class Report
   def initialize
     @employee_reports = []
   end
