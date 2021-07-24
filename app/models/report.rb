@@ -2,7 +2,6 @@
 class Report
 
   def initialize
-    @employees = get_all_employees
     @employee_workdays = log_employee_workdays
   end
 
@@ -38,10 +37,11 @@ class Report
   private
 
   def log_employee_workdays
-    employee_workdays = {}
+    employees = get_all_employees
 
+    employee_workdays = {}
     TimeReport.all.order(:date).each do |time_report|
-      employee = @employees.find { |e| e.id == time_report.employee_id }
+      employee = employees.find { |e| e.id == time_report.employee_id }
       employee_workdays[employee] ||= []
       employee_workdays[employee] << Workday.new(time_report)
     end
@@ -50,7 +50,6 @@ class Report
   end
 
   def get_all_employees
-    # [1, 2]
     employee_ids = TimeReport.distinct.pluck(:employee_id, :job_group)
     employee_ids.sort_by(&:first).collect { |id| Employee.new(id[0], id[1]) }
   end
