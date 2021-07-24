@@ -3,21 +3,20 @@ class Report
 
   def initialize
     @employees = get_all_employees
+    @employee_workdays = {}
+    @employees.each { |e| @employee_workdays[e] = [] }
   end
 
   def generate
-    employee_workdays = {}
-
-    @employees.each { |e| employee_workdays[e] = [] }
 
     TimeReport.all.order(:date).each do |time_report|
       employee = @employees.find { |e| e.id == time_report.employee_id }
-      employee_workdays[employee] << Workday.new(time_report)
+      @employee_workdays[employee] << Workday.new(time_report)
     end
 
     employee_reports = []
 
-    employee_workdays.each do |employee, workdays|
+    @employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
         pay_period = PayPeriod.new(workday)
         emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee.id, pay_period) }
