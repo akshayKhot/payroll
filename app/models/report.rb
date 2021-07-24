@@ -1,17 +1,20 @@
 
 class Report
 
+  def initialize
+    @employees = get_all_employees
+  end
+
   def generate
     employee_reports = []
 
     # Tracks each employees daily work hours
     employee_workdays = {}
 
-    employees = get_all_employees
-    employees.each { |e| employee_workdays[e] = [] }
+    @employees.each { |e| employee_workdays[e] = [] }
 
     TimeReport.all.order(:date).each do |time_report|
-      employee = employees.find { |e| e.id == time_report.employee_id }
+      employee = @employees.find { |e| e.id == time_report.employee_id }
       employee_workdays[employee] << Workday.new(time_report)
     end
 
