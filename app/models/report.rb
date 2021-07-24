@@ -19,13 +19,7 @@ class Report
 
     {
       payroll_report: {
-        employee_reports: employee_reports.collect do |er|
-          {
-            employee_id: er.employee.id,
-            pay_period: er.pay_period,
-            amount_paid: er.amount_paid
-          }
-        end
+        employee_reports: employee_reports.collect { |er| er.get_report }
       }
     }
   end
