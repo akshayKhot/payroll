@@ -18,7 +18,9 @@ class Report
     employee_daily_work_hours.each do |employee, dail_work_hours|
       dail_work_hours.each do |daily_hours|
         pay_period = PayPeriod.new(daily_hours.start_date, daily_hours.end_date)
-        emp_report = employee_reports.find { |er| er.employee_id == employee.id && er.pay_period.start_date == pay_period.start_date && er.pay_period.end_date == pay_period.end_date }
+        emp_report = employee_reports.find { |er| er.employee_id == employee.id &&
+                                                  er.pay_period.start_date == pay_period.start_date &&
+                                                  er.pay_period.end_date == pay_period.end_date }
 
         if emp_report
           emp_report.amount_paid += employee.amount_paid(daily_hours.hours)
