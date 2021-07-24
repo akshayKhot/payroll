@@ -12,7 +12,7 @@ class Report
 
     TimeReport.all.order(:date).each do |time_report|
       employee = employees.find { |e| e.id == time_report.employee_id }
-      employee_daily_work_hours[employee] << DailyWork.new(time_report)
+      employee_daily_work_hours[employee] << WorkDay.new(time_report)
     end
 
     employee_daily_work_hours.each do |employee, dail_work_hours|
