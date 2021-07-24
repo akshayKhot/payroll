@@ -3,7 +3,6 @@ class Report
 
   def generate
     employee_reports = []
-    employee_workdays = log_employee_workdays
 
     employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
@@ -33,7 +32,7 @@ class Report
 
   private
 
-  def log_employee_workdays
+  def employee_workdays
     employees = get_all_employees
 
     employee_workdays = {}
