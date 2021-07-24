@@ -1,14 +1,11 @@
 
 class Report
 
-  def initialize
-    @employee_workdays = log_employee_workdays
-  end
-
   def generate
     employee_reports = []
+    employee_workdays = log_employee_workdays
 
-    @employee_workdays.each do |employee, workdays|
+    employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
         pay_period = PayPeriod.new(workday)
         emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee.id, pay_period) }
