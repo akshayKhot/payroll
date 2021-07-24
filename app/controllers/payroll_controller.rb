@@ -1,7 +1,6 @@
 class PayrollController < ApplicationController
 
   def upload
-    puts "File was uploaded"
   end
 
   def create

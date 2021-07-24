@@ -7,7 +7,7 @@ class ReportGenerator
   def generate
     # [1, 2]
     employee_ids = TimeReport.distinct.pluck(:employee_id, :job_group)
-    employees = employee_ids.collect { |id| Employee.new(id[0], id[1]) }
+    employees = employee_ids.sort_by(&:first).collect { |id| Employee.new(id[0], id[1]) }
 
     employee_daily_work_hours = {}
 
