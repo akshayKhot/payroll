@@ -23,7 +23,8 @@ class Report
         if emp_report
           emp_report.add_amount_to_employee(daily_hours)
         else
-          employee_reports << EmployeeReport.new(employee, pay_period, employee.amount_paid(daily_hours.hours))
+          amount_to_pay = employee.amount_paid(daily_hours.hours)
+          employee_reports << EmployeeReport.new(employee, pay_period, amount_to_pay)
         end
       end
     end
