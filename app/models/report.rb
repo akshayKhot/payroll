@@ -37,10 +37,10 @@ class Report
 
   def log_employee_workdays
     employee_workdays = {}
-    @employees.each { |e| employee_workdays[e] = [] }
 
     TimeReport.all.order(:date).each do |time_report|
       employee = @employees.find { |e| e.id == time_report.employee_id }
+      employee_workdays[employee] ||= []
       employee_workdays[employee] << Workday.new(time_report)
     end
 
