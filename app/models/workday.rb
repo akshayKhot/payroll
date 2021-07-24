@@ -4,8 +4,8 @@ class Workday
   attr_accessor :date, :hours
 
   def initialize(report)
-    @date = report.date.to_datetime
-    @hours = report.hours_worked
+    @date = report[:date].to_datetime
+    @hours = report[:hours_worked]
   end
 
   def pay_period
@@ -13,18 +13,21 @@ class Workday
   end
 
   def start_date
-    if pay_period == :first
-      DateTime.new(@date.year, @date.month, 1).strftime("%Y-%m-%d")
-    else
-      DateTime.new(@date.year, @date.month, 16).strftime("%Y-%m-%d")
-    end
+    day = pay_period == :first ? 1 : 16
+    DateTime.new(@date.year, @date.month, day).strftime("%Y-%m-%d")
   end
 
   def end_date
+    end_of_month.strftime("%Y-%m-%d")
+  end
+
+  private
+
+  def end_of_month
     if pay_period == :second
-      @date.end_of_month.strftime("%Y-%m-%d")
+      @date.end_of_month
     else
-      DateTime.new(@date.year, @date.month, 15).strftime("%Y-%m-%d")
+      DateTime.new(@date.year, @date.month, 15)
     end
   end
 end
