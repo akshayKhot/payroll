@@ -19,7 +19,7 @@ class Report
 
     {
       payroll_report: {
-        employee_reports: employee_reports.collect { |er| er.get_report }
+        employee_reports: employee_reports.collect { |er| er.build }
       }
     }
   end
