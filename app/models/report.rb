@@ -3,18 +3,13 @@ class Report
 
   def initialize
     @employees = get_all_employees
-    @employee_workdays = {}
-    @employees.each { |e| @employee_workdays[e] = [] }
   end
 
   def generate
 
-    TimeReport.all.order(:date).each do |time_report|
-      employee = @employees.find { |e| e.id == time_report.employee_id }
-      @employee_workdays[employee] << Workday.new(time_report)
-    end
-
     employee_reports = []
+
+    log_employee_workdays
 
     @employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
@@ -40,6 +35,16 @@ class Report
         end
       }
     }
+  end
+
+  def log_employee_workdays
+    @employee_workdays = {}
+    @employees.each { |e| @employee_workdays[e] = [] }
+
+    TimeReport.all.order(:date).each do |time_report|
+      employee = @employees.find { |e| e.id == time_report.employee_id }
+      @employee_workdays[employee] << Workday.new(time_report)
+    end
   end
 
   def get_all_employees
