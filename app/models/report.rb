@@ -23,7 +23,7 @@ class Report
         if emp_report
           emp_report.pay_employee_for(workday)
         else
-          employee_reports << EmployeeReport.create(employee, pay_period, workday)
+          employee_reports << EmployeeReport.new(employee, pay_period, workday)
         end
       end
     end
