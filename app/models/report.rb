@@ -21,7 +21,8 @@ class Report
         emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee.id, pay_period) }
 
         if emp_report
-          emp_report.amount_paid += employee.amount_paid(daily_hours.hours)
+          amount = employee.amount_paid(daily_hours.hours)
+          emp_report.add_amount(amount)
         else
           employee_reports << EmployeeReport.new(employee.id, pay_period, employee.amount_paid(daily_hours.hours))
         end

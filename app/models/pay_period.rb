@@ -5,4 +5,8 @@ class PayPeriod
     @start_date = start_date
     @end_date = end_date
   end
+
+  def ==(other)
+    @start_date == other.start_date && @end_date == other.end_date
+  end
 end
