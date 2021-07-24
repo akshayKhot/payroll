@@ -1,6 +1,6 @@
 # require 'active_support/core_ext'
 
-class WorkDay
+class Workday
   attr_accessor :date, :hours
 
   def initialize(report)

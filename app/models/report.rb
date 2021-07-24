@@ -5,25 +5,25 @@ class Report
     employee_reports = []
 
     # Tracks each employees daily work hours
-    employee_daily_work_hours = {}
+    employee_workdays = {}
 
     employees = get_all_employees
-    employees.each { |e| employee_daily_work_hours[e] = [] }
+    employees.each { |e| employee_workdays[e] = [] }
 
     TimeReport.all.order(:date).each do |time_report|
       employee = employees.find { |e| e.id == time_report.employee_id }
-      employee_daily_work_hours[employee] << WorkDay.new(time_report)
+      employee_workdays[employee] << Workday.new(time_report)
     end
 
-    employee_daily_work_hours.each do |employee, dail_work_hours|
-      dail_work_hours.each do |daily_hours|
-        pay_period = PayPeriod.new(daily_hours.start_date, daily_hours.end_date)
+    employee_workdays.each do |employee, workdays|
+      workdays.each do |workday|
+        pay_period = PayPeriod.new(workday)
         emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee.id, pay_period) }
 
         if emp_report
-          emp_report.add_amount_to_employee(daily_hours)
+          emp_report.pay_employee_for(workday)
         else
-          amount_to_pay = employee.amount_paid(daily_hours.hours)
+          amount_to_pay = employee.amount_paid(workday.hours)
           employee_reports << EmployeeReport.new(employee, pay_period, amount_to_pay)
         end
       end
