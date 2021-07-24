@@ -6,29 +6,26 @@ class Report
 
   def generate
 
-    employees = get_employees
-
+    # Tracks each employees daily work hours
     employee_daily_work_hours = {}
 
-    employees.each do |emp|
-      employee_daily_work_hours[emp.id] = []
-    end
+    employees = get_all_employees
+    employees.each { |e| employee_daily_work_hours[e] = [] }
 
     TimeReport.all.order(:date).each do |time_report|
-      daily_work = DailyWork.new(time_report.date, time_report.hours_worked)
-      employee_daily_work_hours[time_report.employee_id] << daily_work
+      employee = employees.find { |e| e.id == time_report.employee_id }
+      employee_daily_work_hours[employee] << DailyWork.new(time_report)
     end
 
-    employee_daily_work_hours.each do |emp_id, dail_work_hours|
+    employee_daily_work_hours.each do |employee, dail_work_hours|
       dail_work_hours.each do |daily_hours|
         pay_period = PayPeriod.new(daily_hours.start_date, daily_hours.end_date)
-        employee = employees.find { |emp| emp.id == emp_id }
-        emp_report = @employee_reports.find { |er| er.employee_id == emp_id && er.pay_period.start_date == pay_period.start_date && er.pay_period.end_date == pay_period.end_date }
+        emp_report = @employee_reports.find { |er| er.employee_id == employee.id && er.pay_period.start_date == pay_period.start_date && er.pay_period.end_date == pay_period.end_date }
 
         if emp_report
           emp_report.amount_paid += employee.amount_paid(daily_hours.hours)
         else
-          @employee_reports << EmployeeReport.new(emp_id, pay_period, employee.amount_paid(daily_hours.hours))
+          @employee_reports << EmployeeReport.new(employee.id, pay_period, employee.amount_paid(daily_hours.hours))
         end
       end
     end
@@ -40,7 +37,7 @@ class Report
     }
   end
 
-  def get_employees
+  def get_all_employees
     # [1, 2]
     employee_ids = TimeReport.distinct.pluck(:employee_id, :job_group)
     employee_ids.sort_by(&:first).collect { |id| Employee.new(id[0], id[1]) }

@@ -3,9 +3,9 @@
 class DailyWork
   attr_accessor :date, :hours
 
-  def initialize(date, hours)
-    @date = date.to_datetime
-    @hours = hours
+  def initialize(report)
+    @date = report.date.to_datetime
+    @hours = report.hours_worked
   end
 
   def pay_period
