@@ -10,7 +10,7 @@ class TimeReport < ApplicationRecord
                         hours_worked: row["hours worked"],
                         employee_id: row["employee id"],
                         job_group: row["job group"],
-                        file_number: report_id,
+                        report_id: report_id,
                       }
     end
 

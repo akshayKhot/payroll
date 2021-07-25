@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_103222) do
+ActiveRecord::Schema.define(version: 2021_07_25_141637) do
 
   create_table "time_reports", force: :cascade do |t|
     t.datetime "date"
     t.decimal "hours_worked"
     t.integer "employee_id"
     t.string "job_group"
-    t.integer "file_number"
+    t.integer "report_id"
   end
 
 end
