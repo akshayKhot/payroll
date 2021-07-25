@@ -10,7 +10,7 @@ class PayrollReport
         employee_record = employee_records.find { |er| er.belongs_to_employee_for_pay_period?(employee, pay_period) }
 
         if employee_record
-          employee_record.pay_employee_for(workday)
+          employee_record.add_payment_for(workday)
         else
           employee_records << EmployeeRecord.new(employee, pay_period, workday)
         end
