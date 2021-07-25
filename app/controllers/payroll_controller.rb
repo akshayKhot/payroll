@@ -9,8 +9,13 @@ class PayrollController < ApplicationController
       render json: {status: "error", message: "You've already uploaded a time report with the id #{@report_id}."} and return
     end
 
-    TimeReport.parse(@report_id, File.read(@employee_report))
-    render json: {status: "success", message: "The time report is successfully uploaded."}
+    begin
+      TimeReport.parse(@report_id, File.read(@employee_report))
+      render json: {status: "success", message: "The time report is successfully uploaded."}
+    rescue StandardError => e
+      render json: {status: "error", message: "An error occurred when uploading the time report. #{e.message}".strip}
+    end
+
   end
 
   def report
