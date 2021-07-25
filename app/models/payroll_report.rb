@@ -44,7 +44,7 @@ class PayrollReport
   def get_all_employees
     # [[1, "A"], [2, "B"]]
     employee_ids = TimeReport.distinct.pluck(:employee_id, :job_group)
-    employee_ids.sort_by(&:first).collect { |id| Employee.new(id[0], id[1]) }
+    employee_ids.collect { |id| Employee.new(id[0], id[1]) }
   end
 end
 
