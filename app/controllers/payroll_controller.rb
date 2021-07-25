@@ -15,14 +15,13 @@ class PayrollController < ApplicationController
     rescue StandardError => e
       render json: {status: "error", message: "An error occurred when uploading the time report. #{e.message}".strip}
     end
-
   end
 
   def report
     begin
       render :json => Report.new.generate
     rescue StandardError => e
-      render json: {status: "error", message: "An error occurred when uploading the time report. #{e.message}".strip}
+      render json: {status: "error", message: "An error occurred when building the payroll report. #{e.message}".strip}
     end
   end
 
@@ -35,7 +34,6 @@ class PayrollController < ApplicationController
   def get_report_id
     File.basename(@employee_report.original_filename, ".csv").split("-").last
   end
-
 end
 
 
