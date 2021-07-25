@@ -7,10 +7,10 @@ class Report
     employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
         pay_period = PayPeriod.new(workday)
-        emp_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee, pay_period) }
+        employee_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee, pay_period) }
 
-        if emp_report
-          emp_report.pay_employee_for(workday)
+        if employee_report
+          employee_report.pay_employee_for(workday)
         else
           employee_reports << EmployeeReport.new(employee, pay_period, workday)
         end
