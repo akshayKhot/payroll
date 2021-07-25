@@ -26,13 +26,17 @@ To test the API, an API client such as [Postman](https://www.postman.com/downloa
    3. Select `File` from the drop-down under `Body > form-data`
    4. Select the CSV file. 
    5. Click 'Send'.
-      ![](./public/upload.png)
+    
+
+![](./public/upload.png)
 
 3. To fetch the payroll report,
    1. Set method type to `GET`.
    2. Set the URL to: [http://localhost:3000/api/payroll/report](http://localhost:3000/api/payroll/report)
    3. Click 'Send'.
-      ![](./public/report.png)
+      
+
+![](./public/report.png)
 
 ---
 
