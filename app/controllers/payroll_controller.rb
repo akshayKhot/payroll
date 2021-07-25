@@ -19,7 +19,7 @@ class PayrollController < ApplicationController
 
   def report
     begin
-      render :json => Report.new.generate
+      render :json => PayrollReport.new.generate
     rescue StandardError => e
       render json: {status: "error", message: "An error occurred when building the payroll report. #{e.message}".strip}
     end
