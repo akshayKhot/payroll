@@ -2,30 +2,30 @@
 class PayrollReport
 
   def generate
-    employee_reports = []
+    employee_records = []
 
     employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
         pay_period = PayPeriod.new(workday)
-        employee_report = employee_reports.find { |er| er.belongs_to_employee_for_pay_period?(employee, pay_period) }
+        employee_record = employee_records.find { |er| er.belongs_to_employee_for_pay_period?(employee, pay_period) }
 
-        if employee_report
-          employee_report.pay_employee_for(workday)
+        if employee_record
+          employee_record.pay_employee_for(workday)
         else
-          employee_reports << EmployeeReport.new(employee, pay_period, workday)
+          employee_records << EmployeeRecord.new(employee, pay_period, workday)
         end
       end
     end
 
-    Report.new(employee_reports)
+    Report.new(employee_records)
   end
 
   private
 
   def employee_workdays
+    employee_workdays = {}
     employees = get_all_employees
 
-    employee_workdays = {}
     TimeReport.all.order(:date).each do |time_report|
       employee = employees.find { |e| e.id == time_report.employee_id }
       employee_workdays[employee] ||= []

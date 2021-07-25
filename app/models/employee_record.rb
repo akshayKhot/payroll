@@ -1,5 +1,5 @@
 
-class EmployeeReport
+class EmployeeRecord
 
   attr_accessor :employee, :pay_period, :amount_paid
 
@@ -17,7 +17,7 @@ class EmployeeReport
     @amount_paid += @employee.amount_paid(workday.hours)
   end
 
-  def build
+  def build_report
     {
       employee_id: @employee.id,
       pay_period: @pay_period,
