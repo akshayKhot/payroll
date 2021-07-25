@@ -1,4 +1,5 @@
-
+# Represents an employee with a unique id, along with their job group.
+# The job group determines the wages for the employee.
 class Employee
   attr_reader :id
 

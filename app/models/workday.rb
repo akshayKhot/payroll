@@ -1,5 +1,7 @@
 # require 'active_support/core_ext'
 
+# A workday represent the day employee did the work
+# and number of hours they worked that day.
 class Workday
   attr_accessor :date, :hours
 

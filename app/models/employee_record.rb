@@ -1,4 +1,6 @@
 
+# Represents the pay period for an employee and
+# the amount paid to that employee for that period
 class EmployeeRecord
 
   attr_accessor :employee, :pay_period, :amount_paid

@@ -1,6 +1,8 @@
 
 class PayrollReport
 
+  # Generates a payroll report containing
+  # each employee's pay for the specific pay period.
   def generate
     employee_records = []
 
@@ -22,6 +24,9 @@ class PayrollReport
 
   private
 
+  # Returns a hash of employees to workdays.
+  # A workday represent the day employee did the work
+  # and number of hours they worked that day.
   def employee_workdays
     employee_workdays = {}
     employees = get_all_employees
@@ -35,7 +40,9 @@ class PayrollReport
     employee_workdays
   end
 
+  # Returns a list of all employees (unique by id) in the database
   def get_all_employees
+    # [[1, "A"], [2, "B"]]
     employee_ids = TimeReport.distinct.pluck(:employee_id, :job_group)
     employee_ids.sort_by(&:first).collect { |id| Employee.new(id[0], id[1]) }
   end
