@@ -3,19 +3,20 @@
 # the amount paid to that employee for that period
 class EmployeeRecord
 
-  attr_accessor :employee, :pay_period, :amount_paid
+  attr_reader :pay_period
+  attr_accessor :employee, :amount_paid
 
-  def initialize(employee, pay_period, workday)
+  def initialize(employee, workday)
     @employee = employee
-    @pay_period = pay_period
+    @pay_period = PayPeriod.new(workday)
     @amount_paid = employee.amount_paid(workday.hours)
   end
 
-  def belongs_to_employee_for_pay_period?(employee, pay_period)
-    @employee == employee && @pay_period == pay_period
+  def belongs_to_employee_for_pay_period_containing_workday?(employee, workday)
+    @employee == employee && @pay_period == PayPeriod.for(workday)
   end
 
-  def add_payment_for(workday)
+  def track_payment_for_pay_period_containing(workday)
     @amount_paid += @employee.amount_paid(workday.hours)
   end
 

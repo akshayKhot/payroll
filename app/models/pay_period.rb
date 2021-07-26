@@ -10,6 +10,10 @@ class PayPeriod
     @end_date = workday.end_date
   end
 
+  def self.for(workday)
+    PayPeriod.new workday
+  end
+
   def ==(other)
     @start_date == other.start_date && @end_date == other.end_date
   end
