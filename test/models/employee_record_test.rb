@@ -22,7 +22,7 @@ class EmployeeRecordTest < ActiveSupport::TestCase
 
   test "amount paid after adding payment for pay period" do
     workday = Workday.new(date: "2020-01-06", hours_worked: 5)
-    @employee_record.track_payment_for_pay_period_containing(workday)
+    @employee_record.add_payment_to_pay_period_for(workday)
     assert_equal "$300.00", @employee_record.amount_paid
   end
 

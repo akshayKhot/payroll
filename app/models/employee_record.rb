@@ -16,7 +16,7 @@ class EmployeeRecord
     @employee == employee && @pay_period == PayPeriod.for(workday)
   end
 
-  def track_payment_for_pay_period_containing(workday)
+  def add_payment_to_pay_period_for(workday)
     @amount_paid += @employee.amount_paid(workday.hours)
   end
 

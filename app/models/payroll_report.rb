@@ -11,7 +11,7 @@ class PayrollReport
         employee_record = employee_records.find { |record| record.belongs_to_employees_pay_period_for_workday?(employee, workday) }
 
         if employee_record
-          employee_record.track_payment_for_pay_period_containing(workday)
+          employee_record.add_payment_to_pay_period_for(workday)
         else
           employee_records << EmployeeRecord.new(employee, workday)
         end
