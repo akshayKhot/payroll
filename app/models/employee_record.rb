@@ -23,8 +23,13 @@ class EmployeeRecord
     {
       employee_id: @employee.id.to_s,
       pay_period: @pay_period,
-      amount_paid: @amount_paid
+      amount_paid: to_currency(@amount_paid)
     }
+  end
+
+  def to_currency(amount_paid)
+    rounded_to_two_decimals = "%.2f" % amount_paid
+    "$#{rounded_to_two_decimals}"
   end
 
 end
