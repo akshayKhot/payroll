@@ -8,7 +8,7 @@ class PayrollReport
 
     employee_workdays.each do |employee, workdays|
       workdays.each do |workday|
-        employee_record = employee_records.find { |record| record.belongs_to_employee_for_pay_period_containing_workday?(employee, workday) }
+        employee_record = employee_records.find { |record| record.belongs_to_employees_pay_period_for_workday?(employee, workday) }
 
         if employee_record
           employee_record.track_payment_for_pay_period_containing(workday)

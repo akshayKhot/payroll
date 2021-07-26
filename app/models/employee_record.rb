@@ -12,7 +12,7 @@ class EmployeeRecord
     @amount_paid = employee.amount_paid(workday.hours)
   end
 
-  def belongs_to_employee_for_pay_period_containing_workday?(employee, workday)
+  def belongs_to_employees_pay_period_for_workday?(employee, workday)
     @employee == employee && @pay_period == PayPeriod.for(workday)
   end
 

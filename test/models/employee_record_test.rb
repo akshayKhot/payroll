@@ -11,13 +11,13 @@ class EmployeeRecordTest < ActiveSupport::TestCase
   end
 
   test "belongs to employee for pay period" do
-    assert_equal true, @employee_record.belongs_to_employee_for_pay_period_containing_workday?(@employee, @workday)
+    assert_equal true, @employee_record.belongs_to_employees_pay_period_for_workday?(@employee, @workday)
 
     workday_first = Workday.new(date: "2020-01-5", hours_worked: 5)
-    assert_equal true, @employee_record.belongs_to_employee_for_pay_period_containing_workday?(@employee, workday_first)
+    assert_equal true, @employee_record.belongs_to_employees_pay_period_for_workday?(@employee, workday_first)
 
     workday_second = Workday.new(date: "2020-01-26", hours_worked: 10)
-    assert_equal false, @employee_record.belongs_to_employee_for_pay_period_containing_workday?(@employee, workday_second)
+    assert_equal false, @employee_record.belongs_to_employees_pay_period_for_workday?(@employee, workday_second)
   end
 
   test "amount paid after adding payment for pay period" do
