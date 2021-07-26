@@ -64,5 +64,5 @@ For a production environment, I would
 - Not doing enough quality assurance, apart from basic testing.
 - Not adding enough `rescue` clauses to handle unexpected errors. 
 
-Note: I used [Jbuilder](https://github.com/rails/jbuilder) to convert the JSON response keys from snake_case to camelCase. However, it seems like it doesn't convert the keys more than two levels deep, even after enabling the `Jbuilder.deep_format_keys` setting. Hence, the `start_date` and `end_date` attributes are still in snake_case in the response. 
+Note: I used [Jbuilder](https://github.com/rails/jbuilder) to convert the JSON response keys from snake_case to camelCase. However, it seems like it doesn't convert the keys more than three levels deep, even after enabling the `Jbuilder.deep_format_keys` setting. Hence, the `start_date` and `end_date` attributes are still in snake_case in the response. 
 
