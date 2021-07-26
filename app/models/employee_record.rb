@@ -21,7 +21,7 @@ class EmployeeRecord
 
   def build_report
     {
-      employee_id: @employee.id,
+      employee_id: @employee.id.to_s,
       pay_period: @pay_period,
       amount_paid: @amount_paid
     }
