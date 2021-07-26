@@ -24,7 +24,7 @@ To test the API, an API client such as [Postman](https://www.postman.com/downloa
    1. Set method type to `POST`.
    2. Set the URL to: [http://localhost:3000/api/payroll/upload](http://localhost:3000/api/payroll/upload)
    3. Select `File` from the drop-down under `Body > form-data`
-   4. Select the CSV file. 
+   4. Select the time report file. 
    5. Click 'Send'.
     
 
@@ -59,8 +59,8 @@ For a production environment, I would
 
 **What compromises did you have to make as a result of the time constraints of this challenge?**
 
-I believe the domain logic could have been expressed in a better way to capture the essence of the business problem. However, here are some of the compromises I had to make due to time constraints
 - Not having enough unit tests to test the boundary conditions.
 - Not building a client that consumes the api and displays the results in a meaningful way.
-- Not doing enough quality assurance, apart from basic testing. 
+- Not doing enough quality assurance, apart from basic testing.
+- Not adding enough `rescue` clauses to handle unexpected errors. 
 
