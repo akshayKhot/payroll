@@ -3,16 +3,16 @@ require "test_helper"
 class PayPeriodTest < ActiveSupport::TestCase
   setup do
     @workday_first = Workday.new(date: "2020-01-04", hours_worked: 10)
-    @pay_period_first = PayPeriod.new(@workday_first)
+    @pay_period_first = PayPeriod.for(@workday_first)
 
     @workday_second = Workday.new(date: "2020-01-04", hours_worked: 10)
-    @pay_period_second = PayPeriod.new(@workday_second)
+    @pay_period_second = PayPeriod.for(@workday_second)
 
     @workday_third = Workday.new(date: "2020-01-10", hours_worked: 10)
-    @pay_period_third = PayPeriod.new(@workday_third)
+    @pay_period_third = PayPeriod.for(@workday_third)
 
     @workday_fourth = Workday.new(date: "2020-01-21", hours_worked: 10)
-    @pay_period_fourth = PayPeriod.new(@workday_fourth)
+    @pay_period_fourth = PayPeriod.for(@workday_fourth)
   end
 
   test "compare same pay periods with same date" do

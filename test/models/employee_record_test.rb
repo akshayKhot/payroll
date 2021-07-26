@@ -5,7 +5,7 @@ class EmployeeRecordTest < ActiveSupport::TestCase
   setup do
     @employee = Employee.new(1, "A")
     @workday = Workday.new(date: "2020-01-04", hours_worked: 10)
-    @pay_period = PayPeriod.new(@workday)
+    @pay_period = PayPeriod.for(@workday)
 
     @employee_record = EmployeeRecord.new(@employee, @workday)
   end
@@ -31,7 +31,7 @@ class EmployeeRecordTest < ActiveSupport::TestCase
     assert_equal @employee_record.pay_period, PayPeriod.for(workday_first)
 
     workday_second = Workday.new(date: "2020-01-16", hours_worked: 10)
-    assert_not_equal @employee_record.pay_period, PayPeriod.new(workday_second)
+    assert_not_equal @employee_record.pay_period, PayPeriod.for(workday_second)
   end
 
   test "build report" do

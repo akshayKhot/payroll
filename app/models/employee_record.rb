@@ -8,7 +8,7 @@ class EmployeeRecord
 
   def initialize(employee, workday)
     @employee = employee
-    @pay_period = PayPeriod.new(workday)
+    @pay_period = PayPeriod.for(workday)
     @amount_paid = employee.amount_paid(workday.hours)
   end
 
